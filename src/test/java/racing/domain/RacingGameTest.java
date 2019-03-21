@@ -97,11 +97,11 @@ public class RacingGameTest {
     String carNameCrong = "crong";
     String carNameHonux = "honux";
 
-    String[] carNameArray = {carNamePobi, carNameCrong, carNameHonux};
+    String[] carNames = {carNamePobi, carNameCrong, carNameHonux};
 
     // When
     RacingGame racingGame = new RacingGame();
-    List<Car> cars = racingGame.generateCars(carNameArray);
+    List<Car> cars = racingGame.generateCars(carNames);
 
     // Then
     assertThat(cars.size()).isEqualTo(3);
