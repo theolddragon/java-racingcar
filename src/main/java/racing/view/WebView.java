@@ -11,6 +11,7 @@ import racing.domain.Car;
 import racing.domain.RacingGame;
 import racing.domain.WinnerCars;
 import spark.ModelAndView;
+import spark.Request;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 public class WebView {
@@ -28,10 +29,9 @@ public class WebView {
     get("/", (request, response) -> render(new HashMap<>(), "/index.html"));
 
     post("/name", (request, response) -> {
+
       String carNames = request.queryParams("names");
-      String[] carNamesArray = carNames.split(" ");
-      List<Car> cars = racingGame.generateCars(carNamesArray);
-      model.put("cars", cars);
+      model.put("cars", getCars(carNames));
 
       return render(model, "/game.html");
     });
@@ -47,6 +47,10 @@ public class WebView {
 
       return render(model, "/result.html");
     });
+  }
+
+  private static List<Car> getCars(String carNames) {
+    return racingGame.generateCars(carNames.split(" "));
   }
 
   public static String render(Map<String, Object> model, String templatePath) {
